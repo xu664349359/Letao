@@ -1,0 +1,12 @@
+.body_bgc{
+    background-color: #242C31;
+}
+.panel-heading > .panel-title{
+    height: 40px;   
+    line-height: 40px;
+    text-align: center;
+    font-size: 20px;
+}
+.login{
+    margin-top: 20%;
+}
