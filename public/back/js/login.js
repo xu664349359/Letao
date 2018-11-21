@@ -23,7 +23,9 @@ $('#form').bootstrapValidator({
           notEmpty: {
             message: '用户名不能为空'
           },
-         
+          callback:{
+            message:'用户名不存在'
+          },
           //长度校验
           stringLength: {
             min: 4,
@@ -35,6 +37,7 @@ $('#form').bootstrapValidator({
             regexp: /^[a-zA-Z0-9_\.]+$/,
             message: '用户名由数字字母下划线和.组成'
           }
+         
         }
       },
       password:{
@@ -43,7 +46,10 @@ $('#form').bootstrapValidator({
             notEmpty: {
               message: '密码不能为空'
             },
-           
+            callback:{
+              message:'密码错误'
+            }
+           ,
             //长度校验
             stringLength: {
               min: 6,
@@ -78,13 +84,20 @@ $('#form').bootstrapValidator({
                 location.href = 'index.html';
             }
             if(info.error === 1001){
-                alert(info.message);
+              $('#form').data('bootstrapValidator').updateStatus('password', 'INVALID', 'callback');
             }
             if(info.error === 1000){
-                alert(info.message);
+                // alert(info.message);
+              $('#form').data('bootstrapValidator').updateStatus('username', 'INVALID', 'callback');
+
             }
         }
     })
 
+  });
+
+//重置按钮添加点击事件，重置样式
+  $('#reset').click(function(){
+    $('#form').data('bootstrapValidator').resetForm();
   })
 })
