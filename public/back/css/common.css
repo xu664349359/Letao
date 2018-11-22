@@ -7,6 +7,9 @@ a:visited{
 ul{
     list-style: none;
 }
+body{
+    /* height: 2000px; */
+}
 .body_bgc{
     background-color: #242C31;
 }
@@ -27,7 +30,13 @@ ul{
     top:0;
     width: 180px;
     height:100%;
+    z-index: 999;
+    transition: left 1s;
 }
+.lt_aside.toggle{
+    left: -180px;
+}
+
 .lt_aside .title{
     height: 50px;
     background-color: #487EA5;
@@ -62,20 +71,42 @@ ul{
     color: #fff;
     font-size: 14px;
     padding-left: 45px;
+    border-left: 3px solid transparent;
+}
+.lt_aside .nav li a.current{
+    background-color: #1D1E20;
+    border-left: 3px solid #276695;
 }
 .lt_aside .nav li a i{
     margin-right: 2px;
 }
-.lt_aside .nav li .class{
-    padding-left: 20px;
+.lt_aside .nav li .class a{
+    padding-left: 65px;
+}
+.lt_aside .nav li #slide_content{
+    display: none;
 }
 .lt_content{
     padding-left: 180px;
+    padding-top: 70px;  
+    transition: padding-left 1s;
+}
+.lt-content.toggle{
+    padding: left 0px;
+
 }
 .lt_content .top{
+    position: fixed;
+    left: 0;
+    top: 0;
     height: 50px;
     width: 100%;
+    padding-left: 180px;
     background-color: #508CB8;
+    transition: padding-left 1s;
+}
+.lt_content .top.toggle{
+    padding-left:0px;
 }
 .lt_content .top a{
     display: block;
@@ -85,4 +116,17 @@ ul{
     text-align: center;
     line-height: 50px;
     color: #fff;
+}
+ .modal-body p{
+    color: red;
+}
+.lt_content .bottom .bar_left,
+.lt_content .bottom .bar_right{
+    width: 48%;
+    height: 500px;
+}
+/* 用户页面 */
+
+.lt_content .bottom .user_count td{
+vertical-align: middle;
 }

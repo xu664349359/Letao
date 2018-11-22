@@ -22,7 +22,7 @@
         <div class="nav">
             <ul>
                 <li>
-                    <a href="user.html">
+                    <a href="user.html" class="current">
                         <i class="glyphicon glyphicon-user"></i>
                         <span>用户管理</span>
                     </a>
@@ -64,20 +64,47 @@
             <div class="bottom">
 
                 <ol class="breadcrumb">
-                    <li><a href="javascript:;">管理系统</a></li>
-                    <li>首页</li>
+                    <li><a href="index.html">管理系统</a></li>
+                    <li>用户管理</li>
                 </ol>
-                <div class="bar">
-                    <div class="bar_left pull-left"></div>
-                    <div class="bar_right pull-right"></div>
-                </div>
+                <!-- 序号	用户名	手机号	状态	操作 -->
+               <div class="user_count">
+                   <table class="table table-bordered table-hover" style="text-align: center">
+                       <thead>
+                           <tr>
+                               <th>序号</th>
+                               <th>用户名</th>
+                               <th>手机号</th>
+                               <th>状态</th>
+                               <th>操作</th>
+                           </tr>
+                       </thead>
+                       <tbody>  
+                           <!-- 1	itcast	15757771111	正常	
+ -->
+                           <tr>
+                               <td>1</td>
+                               <td>itcast</td>
+                               <td>15757771111</td>
+                               <td>正常</td>
+                               <td>
+                                   <button class="btn btn-danger">禁用</button>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+                   <div style="text-align: right">
+                        <ul id="pagintor"></ul>
+                    </div>
+                   
+               </div>
                 
             </div>  
         </div>
        
     </div>
     <!-- 模态框部分 -->
-    <div class="modal fade" tabindex="-1" id="myModal">
+    <div class="modal fade" tabindex="-1" id="user_Modal">
         <div class="modal-dialog modal-sm" >
             <div class="modal-content">
             <div class="modal-header">
@@ -85,22 +112,39 @@
                 <h4 class="modal-title">温馨提示</h4>
             </div>
             <div class="modal-body">
-                <p><i class="glyphicon glyphicon-info-sign"></i><span>您确定要退出后台管理系统吗？</span></p>
+                <p><i class="glyphicon glyphicon-info-sign"></i><span>你确定要执行此操作吗？</span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="logOut_sure">退出</button>
+                <button type="button" class="btn btn-primary" id="btn_sure">退出</button>
             </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <script type="text/html" id="user_tmp">
+        {{each rows v i }}  
+            <tr>
+                <td>{{i+1+(page-1)*size}}</td>
+                <td>{{v.username}}</td>
+                <td>{{v.mobile}}</td>
+                <td>{{v.isDelete === 1 ? "正常":"禁用"}}</td>
+                <td data-id="{{v.id}}">
+                    {{if v.isDelete === 1}}
+                       <button class="btn btn-danger">禁用</button>
+                    {{ else }}    
+                       <button class="btn btn-success">启用</button>
+                    {{ /if }}
+                </td>
+            
+            </tr>
+        {{/each}}
+    </script>
     <script src="./lib/jquery/jquery.min.js"></script>
     <script src="./lib/nprogress/nprogress.js"></script>
-    <!-- <script src="./js/isLine.js"></script> -->
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="./lib/echarts/echarts.min.js"></script>
+    <script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+    <script src="./lib/artTemplate/template-web.js"></script>
     <script src="./js/common.js"></script>
-    <script src="./js/index.js"></script>
-    
+    <script src="./js/user.js"></script>
 </body>
 </html>
