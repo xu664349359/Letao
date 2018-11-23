@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>乐淘后台管理首页</title>
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="./lib/nprogress/nprogress.css">
     <link rel="stylesheet" href="./css/common.css">
 </head>
 <body>
@@ -26,16 +28,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:;">
+                    <a href="javascript:;" id="slide">
                         <i class="glyphicon glyphicon-list"></i>
                         <span>分类管理</span>
                     </a>
-                    <div class="class class1">
-                        <a href="javascript:;" class="current">一级分类</a>
+                    <div id ="slide_content" style="display :block">
+                        <div class="class class1">
+                            <a href="javascript:;" class="current">一级分类</a>
+                        </div>
+                        <div class="class class2">
+                            <a href="cartTwo.html">二级分类</a>
+                        </div> 
                     </div>
-                    <div class="class class2">
-                        <a href="cartTwo.html">二级分类</a>
-                    </div>
+                    
                 </li>
                 <li>
                     <a href="product.html">
@@ -47,17 +52,99 @@
         </div>
     </div>
     <div class="lt_content">
-        <div class="top">
-            <a href="javascript:;" class="pull-left">
-                <i class="glyphicon glyphicon-align-justify"></i>
-            </a>
-            <a href="javascript:;" class="pull-right">
-                <i class="glyphicon glyphicon-log-out"></i>
-            </a>
+        <div class="container-fluid">
+            <div class="top">
+                <a href="javascript:;" class="pull-left" id="hide">
+                    <i class="glyphicon glyphicon-align-justify"></i>
+                </a>
+                <a href="javascript:;" class="pull-right" id="logOut">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                </a>
+            </div>
+            <div class="bottom">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">管理系统</a></li>
+                    <li>分类管理</li>
+                    <li>一级分类</li>
+                </ol>
+                <button class="btn btn-default" id="addcartOne">添加分类</button>
+                <div class="table">
+                     <table class="table table-bordered" style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th width="20%"style="text-align: center">序号</th>
+                                <th style="text-align: center">一级分类名</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>鹏鹏管</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align:right"><ul id="pagintor"></ul></div>
+                    
+                </div>
+                   
+            </div>
         </div>
-        <div class="bottom"></div>
     </div>
+    <!-- 模态框部分 -->
+    <div class="modal fade" tabindex="-1" id="cartOne_Modal">
+            <div class="modal-dialog modal-sm" >
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ><span>&times;</span></button>
+                    <h4 class="modal-title">添加分类</h4>
+                </div>
+                <form id="cartOne_form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                        <input type="text" class="form-control" name="categoryName" id="categoryName" placeholder="请输入一级分类名称">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary" id="cartOne_sure">添加</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" id="myModal">
+        <div class="modal-dialog modal-sm" >
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ><span>&times;</span></button>
+                <h4 class="modal-title">温馨提示</h4>
+            </div>
+            <div class="modal-body">
+                <p><i class="glyphicon glyphicon-info-sign"></i><span>您确定要退出后台管理系统吗？</span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="logOut_sure">退出</button>
+            </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script type="text/html" id="cartOne_tmp">
+        {{ each rows v i}}
+        <tr>
+            <td>{{i+1+(page-1)*size}}</td>
+            <td>{{v.categoryName}}</td>
+        </tr>
+        {{ /each }}
+    </script>
     <script src="./lib/jquery/jquery.min.js"></script>
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+    <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+    <script src="./lib/artTemplate//template-web.js"></script> 
+    <script src="./lib/nprogress/nprogress.js"></script>
+    <script src="./js/cartOne.js"></script>
+    <script src="./js/common.js"></script>
 </body>
 </html>

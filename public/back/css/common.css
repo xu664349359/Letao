@@ -7,9 +7,9 @@ a:visited{
 ul{
     list-style: none;
 }
-body{
+/* body{ */
     /* height: 2000px; */
-}
+/* } */
 .body_bgc{
     background-color: #242C31;
 }
@@ -129,4 +129,10 @@ body{
 
 .lt_content .bottom .user_count td{
 vertical-align: middle;
+}
+
+/* 分类一 */
+.lt_content .bottom .table{
+    padding-top: 30px;
+    /* text-align: center; */
 }
