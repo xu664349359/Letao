@@ -136,3 +136,14 @@ vertical-align: middle;
     padding-top: 30px;
     /* text-align: center; */
 }
+/* 二级分类 */
+.lt_content .bottom #cartTwo td {
+    vertical-align: middle;
+}
+#cartTwo_Modal .mod.al-content{
+    background-color: #fff;
+    border-radius: 5px;
+}
+#cartTwo_form .cart_img{
+    padding-top: 20px;
+}
