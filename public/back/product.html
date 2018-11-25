@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>乐淘后台管理首页</title>
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="./lib/nprogress/nprogress.css">
     <link rel="stylesheet" href="./css/common.css">
 </head>
 <body>
@@ -26,19 +28,22 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:;">
+                    <a href="javascript:;" id="slide">
                         <i class="glyphicon glyphicon-list"></i>
                         <span>分类管理</span>
                     </a>
-                    <div class="class class1">
-                        <a href="cart0ne.html">一级分类</a>
+                    <div id ="slide_content">
+                        <div class="class class1">
+                            <a href="cart0ne.html">一级分类</a>
+                        </div>
+                        <div class="class class2">
+                            <a href="cartTwo.html">二级分类</a>
+                        </div> 
                     </div>
-                    <div class="class class2">
-                        <a href="cartTwo.html">二级分类</a>
-                    </div>
+                    
                 </li>
                 <li>
-                    <a href="javascript:;" class="current">
+                    <a href="product.html" class="current">
                         <i class="glyphicon glyphicon-tags"></i>
                         <span>商品管理</span>
                     </a>
@@ -47,17 +52,175 @@
         </div>
     </div>
     <div class="lt_content">
-        <div class="top">
-            <a href="javascript:;" class="pull-left">
-                <i class="glyphicon glyphicon-align-justify"></i>
-            </a>
-            <a href="javascript:;" class="pull-right">
-                <i class="glyphicon glyphicon-log-out"></i>
-            </a>
+        <div class="container-fluid">
+            <div class="top">
+                <a href="javascript:;" class="pull-left" id="hide">
+                    <i class="glyphicon glyphicon-align-justify"></i>
+                </a>
+                <a href="javascript:;" class="pull-right" id="logOut">
+                    <i class="glyphicon glyphicon-log-out"></i>
+                </a>
+            </div>
+            <div class="bottom">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">管理系统</a></li>
+                    <li>商品管理</li>
+                </ol>
+                <button class="btn btn-default" id="addproduct">添加商品</button>
+                <div class="table">
+                     <table class="table table-bordered" style="text-align: center" id="cartTwo">
+                        <thead>
+                                <!-- 序号	商品名称	商品描述	商品库存	商品尺寸	商品状态	操作 -->
+                            <tr>
+                                <th style="text-align: center">序号</th>
+                                <th style="text-align: center">商品名称</th>
+                                <!-- 序号	一级分类名称	二级分类名称	二级分类LOGO -->
+                                <th style="text-align: center">商品描述</th>
+                                <th style="text-align: center">商品库存</th>
+                                <th style="text-align: center">商品尺寸</th>
+                                <th style="text-align: center">商品状态</th>
+                                <th style="text-align: center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+ <!-- 1	【莹恋】MIZUNO美津浓V1GA159002乒乓球鞋男鞋女鞋室内综合训练鞋	描述123123	44	35-56	已上架	 -->
+
+                            <tr>
+                                <td>1</td>
+                                <td>【莹恋】MIZUNO美津浓V1GA159002乒乓球鞋男鞋女鞋室内综合训练鞋</td>
+                                <!-- 1	女士馆	阿萨德2 -->
+                                <td>描述123123</td>
+                                <td>44</td>
+                                <td>35-56</td>
+                                <td>已上架</td>
+                                <td><button class="btn btn-danger">下架</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align:right"><ul id="pagintor"></ul></div>
+                    
+                </div>
+                   
+            </div>
         </div>
-        <div class="bottom"></div>
     </div>
+    <!-- 模态框部分 -->
+    <div class="modal fade" tabindex="-1" id="product_Modal">
+            <div class="modal-dialog" >
+                <div class="mod al-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ><span>&times;</span></button>
+                    <h4 class="modal-title">添加分类</h4>
+                </div>
+                <form id="product_form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="btn-group">
+                                    <button type="button" class="btn btn-default" id="drop" data-toggle="dropdown">
+                                    <span class="txt">请选择二级分类</span>
+                                    <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="cart_drop">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                   
+                                    <li><a href="#">Separated link</a></li>
+                                    </ul>
+                            </div>
+                            <input type="hidden" id="cart_input"  name="brandId">
+                        </div>
+                        <div class="form-group">
+                        <input type="text" class="form-control" name="proName" id="proName" placeholder="请输入商品名称">
+                        <input type="hidden" name="hot" value="1">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="proDesc" id="proDesc" rows="5" class="form-control" placeholder="请添加商品描述"></textarea>
+                        </div>
+                        <!-- 商品库存 -->
+                        <div class="form-group">
+                            <input type="text" name="num" class="form-control" placeholder="请输入产品库存">
+                        </div>
+                        <!-- 商品尺码 -->
+                        <div class="form-group">
+                            <input type="text" name="size" class="form-control" placeholder="请输入商品尺码">
+                        </div>
+                        <!-- 商品原价 -->
+                        <div class="form-group">
+                            <input type="text" name="oldPrice" class="form-control" placeholder="请输入商品原价">
+                        </div>
+                        <!-- 商品现价 -->
+                        <div class="form-group">
+                            <input type="text" name="price" class="form-control" placeholder="请输入商品现价"">
+                        </div>
+                        <div class="form-group">
+                            <label for="fileupload" class="btn btn-default" id="add_img">添加图片</label>
+                            
+                            <input id="fileupload" type="file" name="pic1" data-url="/product/addProductPic" style="display:none" multiple>
+                            <input type="hidden" name="picAdress" id="adress">
+                            <div class="cart_img">
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary" id="cartTwo_sure">添加</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" id="myModal">
+        <div class="modal-dialog modal-sm" >
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ><span>&times;</span></button>
+                <h4 class="modal-title">温馨提示</h4>
+            </div>
+            <div class="modal-body">
+                <p><i class="glyphicon glyphicon-info-sign"></i><span>您确定要退出后台管理系统吗？</span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="logOut_sure">退出</button>
+            </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script type="text/html" id="product_tmp">
+        {{each rows v i}}
+        <tr>
+            <td>{{i+1+(page-1)*size}}</td>
+            <td>{{v.proName}}</td>
+            <!-- 1	女士馆	阿萨德2 -->
+            <td>{{v.proDesc}}</td>
+            <td>{{v.num}}</td>
+            <td>{{v.size}}</td>
+            <td>已上架</td>
+            <td>
+
+                <button class="btn btn-danger">下架</button>
+            
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/html" id="product_cart">
+        {{each rows v i}}
+            <li><a href="javascript:;" data-id={{v.id}}>{{v.brandName}}</a></li>
+        {{/each}}
+    </script>
     <script src="./lib/jquery/jquery.min.js"></script>
     <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+    <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+    <script src="./lib/artTemplate//template-web.js"></script> 
+    <script src="./lib/jquery-fileupload/jquery.ui.widget.js"></script>
+    <script src="./lib/jquery-fileupload/jquery.fileupload.js"></script>
+    <script src="./lib/nprogress/nprogress.js"></script>
+    <script src="./js/product.js"></script>
+    <script src="./js/common.js"></script>
 </body>
 </html>
